@@ -18,7 +18,7 @@ pipeline {
 		stage ('Build docker image') {
     		steps {
     			echo "Docker step"
-        		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t nike-hello-worldd .'
+        		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t nike-hello-world .'
     			}
 		}
     	stage('Deploy image') {
@@ -26,7 +26,7 @@ pipeline {
         		echo "Pushing docker image to repository"
             	script	{
                 	docker.withRegistry("https://" + registry, "ecr:us-east-1:" + registryCredential) {
-                    docker.image("nike-hello-worldd:latest").push()
+                    docker.image("nike-hello-world:latest").push()
                	 }
             }
         }

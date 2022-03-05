@@ -26,7 +26,7 @@ pipeline {
         		echo "Docker step"
             	script	{
                 	docker.withRegistry("https://" + registry, "ecr:us-east-1:" + registryCredential) {
-                    bat 'docker.image("nike-hello-world:latest").push()'
+                    docker.image("nike-hello-world:latest").push()
                	 }
             }
         }

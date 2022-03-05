@@ -12,7 +12,7 @@ pipeline {
         }
 		stage ('Build docker image') {
     		steps {
-        		sh 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t nike/rest-service-docker .'
+        		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t nike/rest-service-docker .'
     }
 }
     }

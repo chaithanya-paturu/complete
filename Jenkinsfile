@@ -19,7 +19,6 @@ pipeline {
     		steps {
     			echo "Docker step"
         		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t nike-hello-world .'
-        		bat 'docker tag nike-hello-world 026234048714.dkr.ecr.us-east-1.amazonaws.com/nike-hello-world'
     			}
 		}
     	stage('Deploy image') {
@@ -27,7 +26,7 @@ pipeline {
         		echo "Docker step"
             	script	{
                 	docker.withRegistry("https://" + registry, "ecr:us-east-1:" + registryCredential) {
-                    bat 'docker push nike-hello-world:latest'
+                    bat 'docker.image("nike-hello-world:latest").push()'
                	 }
             }
         }

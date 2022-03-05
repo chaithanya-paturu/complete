@@ -18,7 +18,7 @@ pipeline {
 		stage ('Build docker image') {
     		steps {
     			echo "Docker step"
-        		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t nike/rest-service-docker .'
+        		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t rest-service .'
     			}
 		}
     	stage('Deploy image') {
@@ -26,7 +26,7 @@ pipeline {
         		echo "Docker step"
             	script	{
                 	docker.withRegistry("https://" + registry, "ecr:us-east-1:" + registryCredential) {
-                	docker push 026234048714.dkr.ecr.us-east-1.amazonaws.com/nike/rest-service-docker
+                	docker push 026234048714.dkr.ecr.us-east-1.amazonaws.com/rest-service:latest
                	 }
             }
         }

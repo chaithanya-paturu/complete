@@ -26,7 +26,7 @@ pipeline {
         		echo "Docker step"
             	script	{
                 	docker.withRegistry("https://" + registry, "ecr:us-east-1:" + registryCredential) {
-                    dockerImage.push()
+                	docker push 026234048714.dkr.ecr.us-east-1.amazonaws.com/nike/rest-service-docker
                	 }
             }
         }

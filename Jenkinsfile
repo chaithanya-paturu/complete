@@ -26,7 +26,7 @@ pipeline {
         		echo "Docker step"
             	script	{
                 	docker.withRegistry("https://" + registry, "ecr:us-east-1:" + registryCredential) {
-                    bat 'docker push ${registry}:${dockerImage}'
+                    bat 'docker push nike/rest-service-docker:latest'
                	 }
             }
         }

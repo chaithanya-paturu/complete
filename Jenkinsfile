@@ -19,7 +19,7 @@ pipeline {
     		steps {
     			echo "Docker step"
         		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t nike-hello-world .'
-        		bat 'docker tag nike-hello-world aws_account_id.dkr.ecr.region.amazonaws.com/nike-hello-world'
+        		bat 'docker tag nike-hello-world 026234048714.dkr.ecr.us-east-1.amazonaws.com/nike-hello-world'
     			}
 		}
     	stage('Deploy image') {

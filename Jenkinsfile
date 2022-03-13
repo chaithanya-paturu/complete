@@ -1,8 +1,8 @@
 pipeline {
   environment {
-    registry = '026234048714.dkr.ecr.us-east-1.amazonaws.com/nike-hello-world'
-    registryCredential = 'c633fe47-56da-46b1-9345-7207557ba827'
-    dockerImage = 'nike-hello-worldd'
+    registry = '694182744302.dkr.ecr.us-east-1.amazonaws.com/hello-world-aws'
+    registryCredential = 'ad580ba8-bb18-4301-9e51-3f592cdc44a7'
+    dockerImage = 'hello-world-aws'
   }
     agent any
     triggers {
@@ -18,7 +18,7 @@ pipeline {
 		stage ('Build docker image') {
     		steps {
     			echo "Docker step"
-        		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t nike-hello-world .'
+        		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t hello-world-aws .'
     			}
 		}
     	stage('Deploy image') {
@@ -26,7 +26,7 @@ pipeline {
         		echo "Pushing docker image to repository"
             	script	{
                 	docker.withRegistry("https://" + registry, "ecr:us-east-1:" + registryCredential) {
-                    docker.image("nike-hello-world:latest").push()
+                    docker.image("hello-world-aws:latest").push()
                	 }
             }
         }

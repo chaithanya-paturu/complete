@@ -50,7 +50,6 @@ pipeline {
                                                  }
                                         }
                                 }
-                }
 
 //     	stage('Push Docker image to ECR') {
 //             steps {

@@ -3,7 +3,6 @@ pipeline {
   environment {
     registry = '694182744302.dkr.ecr.us-east-1.amazonaws.com/hello-world-aws'
     registryCredential = 'ad580ba8-bb18-4301-9e51-3f592cdc44a7'
-    dockerhubCredentials = '04202415'
     dockerImage = 'hello-world-aws'
   }
     agent any
@@ -29,14 +28,11 @@ pipeline {
 		}
 
 		 stage('Push Docker image') {
-                    environment {
-                        DOCKER_HUB_LOGIN = credentials('docker-hub')
-                    }
                     steps {
-                    echo 'docker user name is '+$DOCKER_HUB_LOGIN_USR
-                    echo 'docker password is '+$DOCKER_HUB_LOGIN_PSW
-                        bat 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
-                        bat './gradlew dockerPush -PdockerHubUsername=$DOCKER_HUB_LOGIN_USR'
+                        withCredentials([string(credentialsId: '04202415', variable: 'dockerHubPwd')]) {
+                              bat "docker login -u 04202415 -p ${dockerHubPwd}"
+                           }
+                        bat './gradlew dockerPush -PdockerHubUsername=04202415'
                     }
                 }
 

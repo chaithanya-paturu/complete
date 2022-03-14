@@ -23,7 +23,7 @@ pipeline {
 		stage ('Build docker image') {
     		steps {
     			echo "Docker step"
-        		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t hello-world-aws .'
+        		bat 'docker build --build-arg JAR_FILE=build/libs/rest-service-0.0.1-SNAPSHOT.jar -t 04202415/hello-world-aws:latest .'
     			}
 		}
 

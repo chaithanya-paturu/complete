@@ -37,6 +37,17 @@ pipeline {
                     }
                 }
 
+
+        stage('Deploy to AWS') {
+                    steps {
+                            def dockerRun = 'docker run -p 8081:8081 -d --name aws-hello-world-app 04202415/hello-world-aws:latest'
+                                  echo 'dockerRun - ${dockerRun}'
+                                    sshagent(['ssh-private']) {
+                                      bat "ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-82-129-130.compute-1.amazonaws.com ${dockerRun}"
+                                    }
+                             }
+                }
+
 //     	stage('Push Docker image to ECR') {
 //             steps {
 //                     echo "Pushing docker image to repository"

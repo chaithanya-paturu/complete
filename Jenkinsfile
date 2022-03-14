@@ -33,6 +33,8 @@ pipeline {
                         DOCKER_HUB_LOGIN = credentials('docker-hub')
                     }
                     steps {
+                    echo 'docker user name is '+$DOCKER_HUB_LOGIN_USR
+                    echo 'docker password is '+$DOCKER_HUB_LOGIN_PSW
                         bat 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
                         bat './gradlew dockerPush -PdockerHubUsername=$DOCKER_HUB_LOGIN_USR'
                     }

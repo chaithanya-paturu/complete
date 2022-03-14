@@ -33,7 +33,7 @@ pipeline {
                         echo 'Docker hub pass is ${dockerHubPwd}'
                               bat "docker login -u 04202415 -p ${dockerHubPwd}"
                            }
-                        bat './gradlew dockerPush -PdockerHubUsername=04202415'
+                        bat 'docker push 04202415/hello-world-aws:latest'
                     }
                 }
 

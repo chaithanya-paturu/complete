@@ -29,7 +29,7 @@ pipeline {
 
 		 stage('Push Docker image') {
                     steps {
-                        withCredentials([string(credentialsId: '04202415', variable: 'dockerHubPwd')]) {
+                        withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
                               bat "docker login -u 04202415 -p ${dockerHubPwd}"
                            }
                         bat './gradlew dockerPush -PdockerHubUsername=04202415'

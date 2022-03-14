@@ -37,16 +37,24 @@ pipeline {
                     }
                 }
 
+          stage('Deploy to AWS ECS') {
+              steps {
+                      withAWS(credentials: 'ad580ba8-bb18-4301-9e51-3f592cdc44a7', region: "us-east-1") {
+                          sh './gradlew awsCfnMigrateStack awsCfnWaitStackComplete -PsubnetId=subnet-0f73e36ee1d023e5f -PdockerHubUsername=04202415 -Pregion=us-east-1'
+                      }
+                          }
+          }
 
-        stage('Deploy to AWS') {
-                    steps {
-                                script{
-                                      def dockerRun = 'docker run -p 8081:8081 -d --name aws-hello-world-app 04202415/hello-world-aws:latest'
-                                      echo 'dockerRun - ${dockerRun}'
-                                      bat 'ssh  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i C:\\Users\\raman\\Downloads\\sai-teja-key.pem ubuntu@ec2-3-82-129-130.compute-1.amazonaws.com ${dockerRun}'
-                                         }
-                                        }
-                                }
+//         stage('Deploy to AWS') {
+//                     steps {
+//                                 script{
+//                                       def dockerRun = 'docker run -p 8081:8081 -d --name aws-hello-world-app 04202415/hello-world-aws:latest'
+//                                       echo 'dockerRun - ${dockerRun}'
+//                                       bat 'ssh  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i C:\\Users\\raman\\Downloads\\sai-teja-key.pem ubuntu@ec2-3-82-129-130.compute-1.amazonaws.com ${dockerRun}'
+//                                          }
+//                                         }
+//                                 }
+
 
 //     	stage('Push Docker image to ECR') {
 //             steps {
